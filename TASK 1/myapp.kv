@@ -1,0 +1,93 @@
+#:import Window kivy.core.window.Window
+#:import MDCheckbox kivymd.uix.selectioncontrol.MDCheckbox
+
+<MyBoxLayout>:
+    orientation: 'vertical'
+    padding: dp(10)
+    spacing: dp(10)
+    canvas.before:
+        Color:
+            rgba: 0.8, 0.8, 0.8, 1  # Light gray background color
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    RelativeLayout:
+        size_hint_y: None
+        height: dp(60)
+        canvas.before:
+            Color:
+                rgba: 0.6, 0.6, 0.6, 1  # Darker gray background color for RelativeLayout
+            Rectangle:
+                pos: self.pos
+                size: self.size
+            Color:
+                rgba: 0, 0, 0, 1  # Black border color
+            Line:
+                width: 2
+                rectangle: self.x, self.y, self.width, self.height
+
+        TextInput:
+            id: search
+            hint_text: "Search..."
+            size_hint: 0.3, 0.6
+            font_size: 30
+            pos_hint: {'center_x': 0.5, 'top': 1.0}
+            on_text: root.OnText(self.text)
+
+        MDRectangleFlatButton:
+            text: 'Click me!'
+            font_size: dp(20)
+            size_hint: 0.15, 0.6
+            pos_hint: {'right': 1.0, 'top': 1.0}
+            on_release: root.on_button_press()
+
+    BoxLayout:
+        padding: Window.width * 0.28 if Window.width >= 1080 else 20, 0
+        RecycleView:
+            id: rv
+            viewclass: 'ListItem'
+            RecycleBoxLayout:
+                default_size: None, dp(56)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+                spacing: dp(10)
+
+<ListItem>:
+    orientation: 'horizontal'
+    padding: dp(10)
+    spacing: dp(10)
+    canvas.before:
+        Color:
+            rgba: 0.9, 0.9, 0.9, 1  # Light gray background color for list items
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        Color:
+            rgba: 0, 0, 0, 1  # Black border color
+        Line:
+            width: 2
+            rectangle: self.x, self.y, self.width, self.height
+
+    MDCheckbox:
+        id: Check
+        size_hint: 0.1, 1
+
+    TextInput:
+        id: edit_input
+        hint_text: "Enter Text Here"
+        text: root.text
+        font_size: 24
+        readonly: True
+        size_hint_x: 0.6
+    Button:
+        id: edit
+        text: 'Edit'
+        size_hint_x: 0.2
+        on_release: root.edit_item()
+    Button:
+        text: 'Delete'
+        size_hint_x: 0.2
+        on_release: root.delete_item()
