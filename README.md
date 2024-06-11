@@ -15,7 +15,8 @@ Task 3: [PASSWORD GENERATOR]
 <br>
 
 Task 4: [Rock-Paper-Scissors Game]
-  <li>User Input: Prompt the user to choose rock, paper, or scissors. Computer Selection: Generate a random choice (rock, paper, or scissors) for the computer. Game Logic: Determine the winner based on the user's choice and the computer's choice.</li>
+  <li>User Input: Prompt the user to choose rock, paper, or scissors. </li>
+    <li>Computer Selection: Generate a random choice (rock, paper, or scissors) for the computer. Game Logic: Determine the winner based on the user's choice and the computer's choice.</li>
 <br>
 
 Task 5: [Contact Book]
