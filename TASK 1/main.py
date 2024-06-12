@@ -1,3 +1,9 @@
+from kivy import Config
+Config.set('graphics', 'width', '1200')
+Config.set('graphics', 'height', '800')
+Config.set('graphics', 'minimum_width', '800')
+Config.set('graphics', 'minimum_height', '600')
+
 from kivymd.app import MDApp
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.recycleview import RecycleView
@@ -10,7 +16,6 @@ from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.properties import ListProperty, StringProperty, BooleanProperty
 import dbHandler
-
 
 class ListItem(RecycleDataViewBehavior, BoxLayout):
     text = StringProperty('')
@@ -38,6 +43,10 @@ class ListItem(RecycleDataViewBehavior, BoxLayout):
         app.root.items.remove({"text":f"{self.text}","isChecked":self.isChecked})
         # app.root.items.remove()
         dbHandler.remove_data(self.text)
+        app.root.ids.rv.data = dbHandler.get_data()
+        app.root.ids.rv.refresh_from_data()
+                    
+        
 
     org_text = ""
     def edit_item(self):
@@ -109,6 +118,9 @@ class MyBoxLayout(BoxLayout):
         self.items.append(new_item)
         dbHandler.add_data(new_item["text"],new_item["isChecked"])
         self.ids.search.focus = True
+        self.ids.rv.data = dbHandler.get_data()
+        self.ids.rv.refresh_from_data()
+                    
         
     def extend_items(self, new_items):
         self.items.extend(new_items)
