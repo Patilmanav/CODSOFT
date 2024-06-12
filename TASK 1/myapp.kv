@@ -17,26 +17,28 @@
         height: dp(60)
         canvas.before:
             Color:
-                rgba: 0.6, 0.6, 0.6, 1  # Darker gray background color for RelativeLayout
+                rgba: 0.6, 0.6, 0.6, 1 
             Rectangle:
                 pos: self.pos
                 size: self.size
             Color:
-                rgba: 0, 0, 0, 1  # Black border color
+                rgba: 0, 0, 0, 1 
             Line:
                 width: 2
                 rectangle: self.x, self.y, self.width, self.height
 
-        TextInput:
+        MDTextField:
+    
             id: search
             hint_text: "Search..."
-            size_hint: 0.3, 0.6
+            size_hint_x: 0.3
             font_size: 30
             pos_hint: {'center_x': 0.5, 'top': 1.0}
             on_text: root.OnText(self.text)
+            mode: "round"
 
         MDRectangleFlatButton:
-            text: 'Click me!'
+            text: 'Add Task!'
             font_size: dp(20)
             size_hint: 0.15, 0.6
             pos_hint: {'right': 1.0, 'top': 1.0}
@@ -73,7 +75,9 @@
 
     MDCheckbox:
         id: Check
+        active: True if root.isChecked else False
         size_hint: 0.1, 1
+        on_press: root.on_check(self,edit_input.text)
 
     TextInput:
         id: edit_input
@@ -87,7 +91,7 @@
         text: 'Edit'
         size_hint_x: 0.2
         on_release: root.edit_item()
-    Button:
-        text: 'Delete'
-        size_hint_x: 0.2
+    MDFloatingActionButton:
+        icon: 'delete'
+        size_hint: 0.1, 1
         on_release: root.delete_item()
