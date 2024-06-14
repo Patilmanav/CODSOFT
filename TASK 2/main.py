@@ -1,64 +1,79 @@
-# Design a simple calculator with basic arithmetic operations.
-# Prompt the user to input two numbers and an operation choice.
-# Perform the calculation and display the result.
+from tkinter import Tk,Entry,Label,Button,IntVar,ttk,StringVar
+from Arithmatic_operations import ArithmaticOperations
 
-class ArithmaticOperations:
-    def __init__(self,num1,num2):
-        self.num1 = num1
-        self.num2 = num2
-        
-    def add(self):
-        return self.num1 + self.num2
-    
-    def sub(self):
-        return self.num1 - self.num2
-    
-    def mul(self):
-        return self.num1 * self.num2
-    
-    def div(self):
-        return self.num1 / self.num2
-    
-    def mod(self):
-        return self.num1 % self.num2
-    
-if __name__ == '__main__':
-    
-    while True:
-        n1 = int(input("\n\nEnter First Number: "))
-        n2 = int(input("Enter Second Number: "))
+class GUI():
+    def __init__(self,master) -> None:
+        self.n1 = IntVar()
+        self.n2 = IntVar()
+        self.option = StringVar(value="Select Option")
+
+        # Configure the main window
+        master.geometry("300x300")
+        master.resizable(False, False)
+
+        # Styles
+        style = ttk.Style()
+        style.configure("TButton", font=("Arial", 10), padding=5)
+        style.configure("TLabel", font=("Arial", 10), padding=5)
+        style.configure("TEntry", font=("Arial", 10), padding=5)
+        style.configure("TCombobox", font=("Arial", 10), padding=5)
+
+        # Create and place the first number label and entry
+        lbl1 = ttk.Label(master, text="Enter Number 1: ")
+        lbl1.grid(column=0, row=1, padx=10, pady=5, sticky="w")
+        e1 = ttk.Entry(master, textvariable=self.n1)
+        e1.grid(column=1, row=1, padx=10, pady=5, sticky="e")
+
+        # Create and place the second number label and entry
+        lbl2 = ttk.Label(master, text="Enter Number 2: ")
+        lbl2.grid(column=0, row=2, padx=10, pady=5, sticky="w")
+        e2 = ttk.Entry(master, textvariable=self.n2)
+        e2.grid(column=1, row=2, padx=10, pady=5, sticky="e")
+
+        # Options for arithmetic operations
+        values = ["Addition", "Subtraction", "Multiplication", "Division", "Remainder"]
+        cb = ttk.Combobox(master, values=values, textvariable=self.option)
+        cb.grid(column=0, row=3, columnspan=2, padx=10, pady=5)
+
+        # Create and place the button
+        btn = ttk.Button(master, text="Calculate", command=self.btnClick)
+        btn.grid(column=0, row=4, columnspan=2, padx=10, pady=10)
+
+        # Create and place the result label
+        self.lbl = ttk.Label(master, text="")
+        self.lbl.grid(column=0, row=5, columnspan=2, padx=10, pady=10)
+
+    def btnClick(self):
+        n1 = self.n1.get()
+        n2 = self.n2.get()
         ao = ArithmaticOperations(n1,n2)
-        print("1. Addition\n2.Subtraction\n3.Multiplication\n4.Division\n5.Modulas")
-        
-        while True:
-            
-            n = int(input("Enter your Choice: or press 0 to quit!! : "))
-            match n:
-                case 1:
+        ans = ""
+        try:
+            match self.option.get():
+                case "Addition":
                     ans = f"Addition of {n1} + {n2} = {ao.add()}"
                 
-                case 2:
+                case "Subtraction":
                     ans = f"Subtraction of {n1} - {n2} = {ao.sub()}"
                     
-                case 3:
+                case "Multiplication":
                     ans = f"Multiplication of {n1} * {n2} = {ao.mul()}"
                     
-                case 4:
+                case "Division":
                     ans = f"Division of {n1} / {n2} = {ao.div()}"
-                    
-                case 5:
+                
+                case "Remainder":
                     ans = f"Remainder of {n1} / {n2} = {ao.mod()}"
                     
-                case 0:
-                    print("Exiting...")
-                    break
-                
                 case _:
-                    print("Wrong input... Selecte again!!")
-                    ans = "Answer is: null"
-        
-            print(f"\n\n{ans}\n\n")
-        ch = input("Enter TO Continue or Enter Q/q to Quit...")
-        if ch=="Q" or ch == "q":
-            break
+                    ans = "Please select the option..."
+        except Exception as e:
+            ans = "Error: ",e
                 
+        self.lbl.config(text=ans)
+
+root = Tk()
+root.title("Basic Calculator")
+GUI(root)
+root.mainloop()
+        
