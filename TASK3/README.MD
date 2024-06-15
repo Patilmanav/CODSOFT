@@ -26,7 +26,7 @@ This is a password generator application built using Python and Tkinter. The app
 ## Usage
 Run the application using the following command:
 ```bash
-python password_generator.py
+python main.py
 ```
 
 ## Code Structure
