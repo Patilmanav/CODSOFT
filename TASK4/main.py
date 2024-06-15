@@ -25,12 +25,12 @@ class GameApp:
         self.style.configure("MD.TButton", foreground="blue", background="#2196F3", font=("Roboto", 20), padx=10, pady=5)
         
         try:
-            self.stone_img_path = "TASK4/image1.jpg"
+            self.Rock_img_path = "TASK4/image1.jpg"
             self.paper_img_path = "TASK4/image2.jpg"
             self.scissor_img_path = "TASK4/image3.jpg"
             
-            self.stone_img = Image.open(self.stone_img_path)
-            self.stone_img = ImageTk.PhotoImage(self.stone_img)
+            self.Rock_img = Image.open(self.Rock_img_path)
+            self.Rock_img = ImageTk.PhotoImage(self.Rock_img)
 
             self.paper_img = Image.open(self.paper_img_path)
             self.paper_img = ImageTk.PhotoImage(self.paper_img)
@@ -50,7 +50,7 @@ class GameApp:
         
         # row 1
         heading_font = font.Font(root, weight="bold", underline=True, size=50)
-        heading = ttk.Label(root, text="STONE PAPER SCISSORS", font=heading_font, anchor="center")
+        heading = ttk.Label(root, text="Rock PAPER SCISSORS", font=heading_font, anchor="center")
         heading.grid(column=0, row=0, columnspan=3, sticky="nsew", pady=(20, 10))
         
         # row 2
@@ -99,16 +99,16 @@ class GameApp:
     def game_choice(self,frame):
         
         ttk.Label(frame,text="Select Your Choice...",background="skyblue",font=font.Font(root, weight="bold", underline=True, size=30)).pack(side="top")
-        self.img1 = tk.Button(frame,image=self.stone_img,text="stone",command=self.choose_stone).pack(side=tk.LEFT)
+        self.img1 = tk.Button(frame,image=self.Rock_img,text="Rock",command=self.choose_Rock).pack(side=tk.LEFT)
         self.img2 = tk.Button(frame,image=self.paper_img,command= self.choose_paper).pack(side=tk.LEFT)
         self.img3 = tk.Button(frame,image=self.scissor_img,command=self.choose_scissor).pack(side=tk.LEFT)
         
     def ComputerChoice(self,user_ch):
-        choice = random.choice([self.stone_img,self.paper_img,self.scissor_img])
+        choice = random.choice([self.Rock_img,self.paper_img,self.scissor_img])
         self.Computer_choice.config(image=choice)
         match choice:
-            case self.stone_img:
-                comp_ch = "stone"
+            case self.Rock_img:
+                comp_ch = "Rock"
                 
             case self.paper_img:
                 comp_ch = "paper"
@@ -119,10 +119,10 @@ class GameApp:
         self.game_result(user_ch,comp_ch)
         
         
-    def choose_stone(self):
-        self.User_choice.config(image=self.stone_img)
+    def choose_Rock(self):
+        self.User_choice.config(image=self.Rock_img)
         self.frame.destroy()
-        self.ComputerChoice("stone")
+        self.ComputerChoice("Rock")
     
     def choose_paper(self):
         self.User_choice.config(image=self.paper_img)
@@ -249,7 +249,7 @@ class GameApp:
         print(f"{comp}\t{user}")
         # store beats scissor
         # scissor beats paper
-        # paper beats stone
+        # paper beats Rock
         winning_status = "Winning Status\n"
         
         if self.comp_score >=5 or self.user_score >=5:
@@ -261,7 +261,7 @@ class GameApp:
                 print("User is a winner...")
                 self.AnnounceWinner("User",self.user_score,self.comp_score)
         else:
-            if ((user == "stone" and comp == "scissor") or (user == "scissor" and comp == "paper") or (user == "paper" and comp == "stone")):
+            if ((user == "Rock" and comp == "scissor") or (user == "scissor" and comp == "paper") or (user == "paper" and comp == "Rock")):
                 print("user Win...")
                 self.winnig_status.config(text=f"{winning_status}User Won")
                 self.user_score += 1
