@@ -18,7 +18,7 @@ This is a Rock-Paper-Scissors game implemented using Python and Tkinter. The app
 - **User Interface:** Design a user-friendly interface with clear instructions and feedback.
 
 ## Requirements
-- Python 3.x
+- Python 3.10
 - Tkinter
 - PIL (Python Imaging Library)
 

@@ -10,7 +10,7 @@ This is a simple To-Do List application built using Python and Kivy. The applica
 - User-friendly interface
 
 ## Requirements
-- Python 3.x
+- Python 3.10
 - Kivy
 
 ## Installation

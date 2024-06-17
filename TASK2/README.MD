@@ -10,7 +10,7 @@ This is a simple calculator application built using Python and Tkinter. The calc
 - Error handling for invalid inputs
 
 ## Requirements
-- Python 3.x
+- Python 3.10
 - Tkinter (usually included with Python)
 
 ## Installation

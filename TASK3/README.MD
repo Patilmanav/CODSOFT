@@ -10,7 +10,7 @@ This is a password generator application built using Python and Tkinter. The app
 - Displays the generated password on the screen
 
 ## Requirements
-- Python 3.x
+- Python 3.10
 - Tkinter (usually included with Python)
 
 ## Installation
